@@ -12,6 +12,8 @@ const Dashboard = () => {
   const [userData, setUserData] = useState(null);
   const [foodLogs, setFoodLogs] = useState([]);
   const [totalCalories, setTotalCalories] = useState(0);
+  const progress = userData?.DCI ? (totalCalories / userData.DCI) * 100 : 0;
+
 
   const BASE_URL = process.env.REACT_APP_API_URL; // Update this if your backend URL is different
 
@@ -48,7 +50,7 @@ const Dashboard = () => {
       <div className="header">
         <div className="welcome">
           <h1>
-            Welcome, <span style={{ color: "var(--accent)" }}>User</span>
+            Welcome, <span style={{ color: "var(--accent)" }}></span>
           </h1>
           <p>Track your nutrition and stay healthy</p>
         </div>
@@ -59,7 +61,7 @@ const Dashboard = () => {
 
       {userData && (
         <div className="user-stats">
-          <div className="stat-card"><h3>Email</h3><p>{userData.email || "user@example.com"}</p></div>
+          {/* <div className="stat-card"><h3>Email</h3><p>{ "user@example.com"}</p></div> */}
           <div className="stat-card"><h3>Height</h3><p>{userData.height} cm</p></div>
           <div className="stat-card"><h3>Weight</h3><p>{userData.weight} kg</p></div>
           <div className="stat-card"><h3>Goal</h3><p>{userData.goal}</p></div>
@@ -74,9 +76,11 @@ const Dashboard = () => {
         <div className="progress-bar">
           <div
             className="progress-fill"
+            // 
             style={{
-              width: `${(totalCalories / userData?.DCI) * 100}%`,
+              width: `${progress}%`,
             }}
+            
           ></div>
         </div>
         <div className="progress-details">

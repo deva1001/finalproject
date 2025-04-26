@@ -33,6 +33,11 @@ function MainPage() {
     setUserGoal(userData.goal);
     fetchMealSuggestions(userData.goal);
   }, []);
+  useEffect(() => {
+    if (totalCalories > DCI) {
+      alert('Warning: You have exceeded your Daily Calorie Intake!');
+    }
+  }, [totalCalories, DCI]);
 
   const fetchMealSuggestions = async (goal) => {
     let query = goal === 'gain' ? 'high-calorie' : 'low-calorie high-protein';
